@@ -1,28 +1,46 @@
-const express = require("express");
-
+// const express = require("express");
 const path = require("path");
 
-let app = express();
+// let app = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+let apiRoutes = function (app) {
 
-let apiRoutes = function () {
+    // console.log("Routes Working")
 
-    console.log("Routes Working")
-
-    app.get("/", function (req, res) {
-        res.sendFile(path.join(__dirname, "/app/data/friends.js"))
+    app.get("/api/friends", function (req, res) {
+        res.sendFile(path.join(__dirname, "../data/friends.js"))
     });
 
     app.post("/api/friends", function (req, res) {
-        let newFriend = req.body;
-        
-        console.log(newFriend);
+        let newScores = req.body.scores;
+        let scoresArr = [];
+        console.log(newScores);
 
+        friendsArr.forEach(function(friends) {
+            var scoresDiff = 0;
+
+            newScores.forEach(function (scores, j) {
+                scoresFDiff += (Math.abs(parseInt(friends.scores[j] - parseInt(scores))))
+            });
+            scoresArray.push(scoresDiff);
+            console.log(scoresArray)
+        });
+
+        scoresArray.forEach(function(scores, i){
+            if(scores <= scoresArr[bestMatch]) {
+                bestMatch = i;
+            };
+            console.log(bestMatch)
+        });
+    
+        //return bestMatch data
+        var bestFriend = friendsArr[bestMatch];
+        res.json(bestFriend);
+    
+        friendsArr.push(req.body);
 
     });
 
 };
 
-module.export = apiRoutes();
+module.exports = apiRoutes;

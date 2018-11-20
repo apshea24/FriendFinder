@@ -5,11 +5,7 @@ const path = require("path");
 
 let friendsArr = require("./app/data/friends.js")
 
-let htmlRoutes = require("./app/routing/htmlRoutes.js")
-let apiRoutes = require("./app/routing/apiRoutes.js");
 
-htmlRoutes;
-apiRoutes;
 
 let PORT = process.env.PORT || 8000;
 
@@ -19,11 +15,14 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
 
+require("./app/routing/apiRoutes.js")(app);
+require("./app/routing/htmlRoutes.js")(app);
+
 app.listen(PORT, function() {
     console.log("Server listening on http://localhost:" + PORT)
 });
 
-console.log(friendsArr);
+// console.log(friendsArr);
 
 
 
